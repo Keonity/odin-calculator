@@ -62,6 +62,7 @@ numContainer.addEventListener("click", function(e) {
     }
     console.log("Curr Num: " + currNum);
     console.log("Second Num: " + secondNum);
+    console.log("Current Operator: " + currOp);
 });
 
 let opContainer = document.querySelector(".opButtons");
@@ -74,32 +75,62 @@ opContainer.addEventListener("click", function(e) {
     // console.log(e.target.textContent);
     if (e.target.textContent !== '=') {
         calcDisplay.textContent = e.target.textContent;
-        currOp = calcDisplay.textContent;
+        // currOp = calcDisplay.textContent;
     }
-    console.log("Current Operator: " + currOp);
+    console.log("Current Operator A: " + currOp);
 
     if (secondNum === 0 && (e.target.textContent !== currOp)) {
         currOp = e.target.textContent;
     }
+    console.log("Current Operator B: " + currOp);
 
     if (secondNum !== 0) {
-        switch (currOp) {
-            case ('+'):
-                sum(currNum, secondNum);
-                break;
-            case ('-'):
-                minus(currNum, secondNum);
-                break;
-            case ('*'):
-                multiply(currNum, secondNum);
-                break;
-            case ('/'):
-                divide(currNum, secondNum);
-                break;
-            default:
-                currNum = parseInt(calcDisplay.textContent);
-                break;
+        if (e.target.textContent !== currOp) {
+            switch (currOp) {
+                case ('+'):
+                    sum(currNum, secondNum);
+                    break;
+                case ('-'):
+                    minus(currNum, secondNum);
+                    break;
+                case ('*'):
+                    multiply(currNum, secondNum);
+                    break;
+                case ('/'):
+                    divide(currNum, secondNum);
+                    break;
+                default:
+                    if (containsNumbers(calcDisplay.textContent)) {
+                        currNum = parseInt(calcDisplay.textContent);
+                    }
+                    secondNum = 0;
+                    break;
+            }
+        }
+        else {
+            switch (currOp) {
+                case ('+'):
+                    sum(currNum, secondNum);
+                    break;
+                case ('-'):
+                    minus(currNum, secondNum);
+                    break;
+                case ('*'):
+                    multiply(currNum, secondNum);
+                    break;
+                case ('/'):
+                    divide(currNum, secondNum);
+                    break;
+                default:
+                    if (containsNumbers(calcDisplay.textContent)) {
+                        currNum = parseInt(calcDisplay.textContent);
+                    }
+                    secondNum = 0;
+                    break;
+            }
         }
     }
+    currOp = e.target.textContent;
+    
 
 });
