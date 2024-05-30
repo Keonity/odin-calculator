@@ -134,3 +134,11 @@ opContainer.addEventListener("click", function(e) {
     
 
 });
+
+clearButton = document.querySelector("#clear");
+clearButton.addEventListener("click", function(event) {
+    currNum = 0;
+    currOp = "";
+    secondNum = 0;
+    calcDisplay.textContent = "Calculation";
+});
