@@ -3,7 +3,7 @@ let calcDisplay = document.querySelector(".calculation");
 
 let currNum = 0;
 let currOp = "";
-let secondNum = 0;
+let secondNum = undefined;
 let currMode = "first";
 
 function containsNumbers(str) {
@@ -17,37 +17,45 @@ function containsNumbers(str) {
 }
 
 function sum(a, b) {
-    calcDisplay.textContent = a + b;
-    currNum = parseInt(calcDisplay.textContent);
-    secondNum = 0;
+    calcDisplay.textContent = (parseInt(a + b)).toFixed(3);
+    currNum = parseInt(calcDisplay.textContent).toFixed(3);
+    secondNum = undefined;
     return a + b;
 }
 
 function multiply(a, b) {
-    calcDisplay.textContent = a * b;
-    currNum = parseInt(calcDisplay.textContent);
-    secondNum = 0;
+    calcDisplay.textContent = (a * b).toFixed(3);
+    currNum = parseInt(calcDisplay.textContent).toFixed(3);
+    secondNum = undefined;
     return a * b;
 }
 
 function minus(a, b) {
-    calcDisplay.textContent = a - b;
-    currNum = parseInt(calcDisplay.textContent);
-    secondNum = 0;
+    calcDisplay.textContent = (a - b).toFixed(3);
+    currNum = parseInt(calcDisplay.textContent).toFixed(3);
+    secondNum = undefined;
     return a - b;
 }
 
 function divide(a, b) {
-    calcDisplay.textContent = a / b;
-    currNum = parseInt(calcDisplay.textContent);
-    secondNum = 0;
-    return a/b;
+    // console.log("Test");
+    if (b === 0) {
+        // console.log("Test 2");
+        calcDisplay.textContent = "No divide by zero!";
+        return "0";
+    }
+    else {
+        calcDisplay.textContent = (a / b).toFixed(3);
+        currNum = parseInt(calcDisplay.textContent).toFixed(3);
+        secondNum = undefined;
+        return a/b;
+    }
 }
 
 numContainer.addEventListener("click", function(e) {
     // console.log(e.target.id);
 
-    if (calcDisplay.textContent === "Calculation" || !containsNumbers(calcDisplay.textContent) || (currOp !== "" && secondNum === 0)) {
+    if (calcDisplay.textContent === "Calculation" || !containsNumbers(calcDisplay.textContent) || (currOp !== "" && secondNum === undefined)) {
         calcDisplay.textContent = e.target.id;
     }
     else {
@@ -79,12 +87,12 @@ opContainer.addEventListener("click", function(e) {
     }
     // console.log("Current Operator A: " + currOp);
 
-    if (secondNum === 0 && (e.target.textContent !== currOp)) {
+    if (secondNum === undefined && (e.target.textContent !== currOp)) {
         currOp = e.target.textContent;
     }
     // console.log("Current Operator B: " + currOp);
 
-    if (secondNum !== 0) {
+    if (secondNum !== undefined) {
         if (e.target.textContent !== currOp) {
             switch (currOp) {
                 case ('+'):
@@ -97,6 +105,7 @@ opContainer.addEventListener("click", function(e) {
                     multiply(currNum, secondNum);
                     break;
                 case ('/'):
+                    // console.log('/');
                     divide(currNum, secondNum);
                     break;
                 default:
@@ -119,6 +128,7 @@ opContainer.addEventListener("click", function(e) {
                     multiply(currNum, secondNum);
                     break;
                 case ('/'):
+                    console.log('/');
                     divide(currNum, secondNum);
                     break;
                 default:
@@ -131,6 +141,10 @@ opContainer.addEventListener("click", function(e) {
         }
     }
     currOp = e.target.textContent;
+
+    if (secondNum === 0 && currOp === '/') {
+        calcDisplay.textContent = "No";
+    }
     
 
 });
@@ -139,6 +153,6 @@ clearButton = document.querySelector("#clear");
 clearButton.addEventListener("click", function(event) {
     currNum = 0;
     currOp = "";
-    secondNum = 0;
+    secondNum = undefined;
     calcDisplay.textContent = "Calculation";
 });
