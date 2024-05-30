@@ -45,7 +45,7 @@ function divide(a, b) {
 }
 
 numContainer.addEventListener("click", function(e) {
-    console.log(e.target.id);
+    // console.log(e.target.id);
 
     if (calcDisplay.textContent === "Calculation" || !containsNumbers(calcDisplay.textContent) || (currOp !== "" && secondNum === 0)) {
         calcDisplay.textContent = e.target.id;
@@ -60,9 +60,9 @@ numContainer.addEventListener("click", function(e) {
     else {
         secondNum = parseInt(calcDisplay.textContent);
     }
-    console.log("Curr Num: " + currNum);
+    /* console.log("Curr Num: " + currNum);
     console.log("Second Num: " + secondNum);
-    console.log("Current Operator: " + currOp);
+    console.log("Current Operator: " + currOp); */
 });
 
 let opContainer = document.querySelector(".opButtons");
@@ -77,12 +77,12 @@ opContainer.addEventListener("click", function(e) {
         calcDisplay.textContent = e.target.textContent;
         // currOp = calcDisplay.textContent;
     }
-    console.log("Current Operator A: " + currOp);
+    // console.log("Current Operator A: " + currOp);
 
     if (secondNum === 0 && (e.target.textContent !== currOp)) {
         currOp = e.target.textContent;
     }
-    console.log("Current Operator B: " + currOp);
+    // console.log("Current Operator B: " + currOp);
 
     if (secondNum !== 0) {
         if (e.target.textContent !== currOp) {

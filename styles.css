@@ -41,6 +41,10 @@ button {
 .numButtons {
     display: flex;
     justify-content: center;
+    flex-direction: row;
+    flex-wrap: wrap;
+    width: 125px;
+    margin-bottom: 50px;
     gap: 12px;
 }
 
